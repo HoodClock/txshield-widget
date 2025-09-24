@@ -51,39 +51,34 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 p-6">
-      <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg p-8 w-full max-w-md border border-gray-700">
-        <h1 className="text-3xl font-bold text-white mb-6 text-center">
-          TxShield Widget
-        </h1>
+
+    <div className="widget-container">
+      <div className="widget-card">
+        <h1 className="widget-title">⚡ TxShield Widget</h1>
+
         <input
           type="text"
           placeholder="Contract Address"
           value={contractAddress}
           onChange={(e) => setContractAddress(e.target.value)}
-          className="border border-gray-600 bg-gray-900 text-white p-3 rounded-lg w-full mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="widget-input"
         />
-        <button
-          onClick={scanChecks}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition disabled:opacity-50"
-          disabled={loading}
-        >
-          {loading ? "Scanning..." : "Scan Now"}
+
+        <button onClick={scanChecks} disabled={loading} className="widget-button">
+          {loading ? "⚙️ Scanning..." : "🚀 Scan Now"}
         </button>
 
         {result && (
-          <div className="mt-6 p-4 bg-gray-900 rounded-xl border border-gray-700">
+          <div className="widget-result">
             {result.error ? (
-              <p className="text-red-400 text-center">{result.error}</p>
+              <p className="error-text">❌ {result.error}</p>
             ) : (
               <>
-                <p className="font-semibold text-white">
-                  Honeypot Score:{" "}
-                  <span className="text-blue-400">{result.honeypotScore}</span>
+                <p className="result-text">
+                  🛡 Honeypot Score: <span className="highlight">{result.honeypotScore}</span>
                 </p>
-                <p className="font-semibold text-white mt-3">
-                  Phishing Score:{" "}
-                  <span className="text-blue-400">{result.phishingScore}</span>
+                <p className="result-text">
+                  🎭 Phishing Score: <span className="highlight">{result.phishingScore}</span>
                 </p>
               </>
             )}
@@ -92,4 +87,5 @@ export default function App() {
       </div>
     </div>
   );
+
 }
